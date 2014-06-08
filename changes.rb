@@ -19,6 +19,12 @@ helpers do
   def logged_in?
     !session[:uid].nil?
   end
+
+  def current_user
+    if logged_in?
+      User.get(session[:uid])
+    end
+  end
 end
 
 before do
@@ -43,7 +49,7 @@ get '/auth/failure' do
 end
 
 get '/' do
-  "Hello #{$redis.hgetall("users:#{session[:uid]}")}"
+  haml :index
 end
 
 get '/logout' do
