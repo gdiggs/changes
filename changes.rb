@@ -1,12 +1,17 @@
 require 'bundler'
 Bundler.require
 
+require_relative 'user'
+
 configure do
   enable :sessions
 
   use OmniAuth::Builder do
     provider :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
   end
+
+  uri = URI.parse(ENV["REDISCLOUD_URL"])
+  $redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 end
 
 helpers do
@@ -27,9 +32,8 @@ before do
 end
 
 get '/auth/twitter/callback' do
-  # probably you will need to create a user in the database too...
   session[:uid] = env['omniauth.auth']['uid']
-  # this is the main endpoint to your application
+  User.new(env['omniauth.auth']).save
   redirect to('/')
 end
 
@@ -39,5 +43,10 @@ get '/auth/failure' do
 end
 
 get '/' do
-  "Hello #{session[:uid]}"
+  "Hello #{$redis.hgetall("users:#{session[:uid]}")}"
+end
+
+get '/logout' do
+  session[:uid] = nil
+  redirect to('/')
 end
