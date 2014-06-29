@@ -1,5 +1,13 @@
 %h1 Changes
 
-%form{ method: 'post', action: '/new_url' }
-  %input{ name: 'url', type: :text, placeholder: 'URL' }
+%form{ method: 'post', action: '/sites' }
+  %input{ name: 'site[title]', type: :text, placeholder: 'Title' }
+  %input{ name: 'site[url]', type: :text, placeholder: 'URL' }
   %input{ type: 'submit' }
+
+%h2 Pages saved:
+
+- Site.all.each do |site|
+  %p
+    %a{ href: site.url, target: '_blank' }= site.title
+    Last changed: #{site.updated_at}
