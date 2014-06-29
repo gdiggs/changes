@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
+    %link{href: "http://fonts.googleapis.com/css?family=Eater", rel: "stylesheet", type: "text/css"}
+    %link{ :rel => "stylesheet", :href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" }
+    %link{ :rel => "stylesheet", :href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css" }
+    :css
+      h1 {
+        color: white;
+        font-family: 'Eater', cursive;
+        font-size: 60px;
+        -webkit-text-stroke: 2px black;
+      }
+      body {
+        background:
+          linear-gradient(135deg, #7FFF00 25%, transparent 25%) -50px 0,
+          linear-gradient(225deg, #7FFF00 25%, transparent 25%) -50px 0,
+          linear-gradient(315deg, #7FFF00 25%, transparent 25%),
+          linear-gradient(45deg, #7FFF00 25%, transparent 25%);
+        background-size: 100px 100px;
+        background-color: #000;
+      }
+      .container {
+        background: white;
+        padding-bottom: 50px;
+        padding-top: 20px;
+      }
+    %title Changes
+  %body
+    %h1.text-center Changes
+    .container
+      = yield
