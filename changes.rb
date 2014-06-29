@@ -1,6 +1,8 @@
 require 'bundler'
 Bundler.require
 
+require_relative 'mailer'
+
 configure do
   require_relative 'site'
   DataMapper.finalize
@@ -11,6 +13,15 @@ end
 configure :production do
   DataMapper::Logger.new($stdout, :info)
   set :session_secret, ENV['SESSION_SECRET']
+
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.sendgrid.net",
+    :port => '25',
+    :authentication => :plain,
+    :user_name => ENV['SENDGRID_USERNAME'],
+    :password => ENV['SENDGRID_PASSWORD'],
+    :domain => ENV['SENDGRID_DOMAIN'],
+  }
 end
 
 configure :test do
@@ -22,6 +33,11 @@ configure :development do
   ENV['DATABASE_URL'] = 'postgres://localhost/changes'
   DataMapper::Logger.new($stdout, :debug)
   set :session_secret, '1234567890abcdefg'
+
+  ActionMailer::Base.smtp_settings = {
+    :address => "localhost",
+    :port => '1025'
+  }
 end
 
 configure do
