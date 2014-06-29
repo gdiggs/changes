@@ -10,6 +10,7 @@ end
 
 configure :production do
   DataMapper::Logger.new($stdout, :info)
+  set :session_secret, ENV['SESSION_SECRET']
 end
 
 configure :test do
@@ -20,6 +21,7 @@ end
 configure :development do
   ENV['DATABASE_URL'] = 'postgres://localhost/changes'
   DataMapper::Logger.new($stdout, :debug)
+  set :session_secret, '1234567890abcdefg'
 end
 
 configure do
