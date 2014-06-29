@@ -3,8 +3,8 @@
   %head
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
     %link{href: "http://fonts.googleapis.com/css?family=Eater", rel: "stylesheet", type: "text/css"}
-    %link{ :rel => "stylesheet", :href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" }
-    %link{ :rel => "stylesheet", :href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css" }
+    %link{ :rel => "stylesheet", :href => "//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" }
+    %link{ :rel => "stylesheet", :href => "//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" }
     :css
       h1 {
         color: white;
@@ -26,8 +26,16 @@
         padding-bottom: 50px;
         padding-top: 20px;
       }
+      .pvs { padding-top: 10px; padding-bottom: 10px; }
     %title Changes
   %body
     %h1.text-center Changes
     .container
+      - if flash[:message]
+        .row.text-center
+          %p.bg-success.pvs= flash[:message]
+      - if flash[:error]
+        .row.text-center
+          %p.bg-danger.pvs= flash[:error]
+
       = yield

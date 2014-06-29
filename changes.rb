@@ -34,8 +34,9 @@ end
 post '/sites' do
   @site = Site.new(params['site'])
   if @site.save
-    redirect '/'
+    flash[:message] = "Site added"
   else
-    raise
+    flash[:error] = @site.errors.to_a.flatten.join('. ')
   end
+  redirect '/'
 end
