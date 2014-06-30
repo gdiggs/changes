@@ -6,6 +6,7 @@ Easily get notified when a webpage changes.
 
 * Postgres
 * Rubinius
+* By default, the app will use [mailcatcher](http://mailcatcher.me) in development.
 
 ## Installation
 
