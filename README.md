@@ -1,6 +1,21 @@
 # Changes
 
-Easily get notified when a webpage changes
+Easily get notified when a webpage changes.
+
+## Dependencies
+
+* Postgres
+* Rubinius
+
+## Installation
+
+```
+gem install bundler
+bundle install
+bundle exec foreman start
+```
+
+To check for updates, run `rake update_sites`.
 
 ## License
 
