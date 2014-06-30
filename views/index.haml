@@ -13,4 +13,4 @@
       - Site.all.each do |site|
         %li
           %a{ href: site.url, target: '_blank' }= site.title
-          Last changed: #{site.updated_at}
+          Last changed on #{site.updated_at.strftime("%A, %B %-d, %Y at %-l:%M%P")}
